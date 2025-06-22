@@ -65,7 +65,7 @@ else if (trimmedQuery.endsWith(".imageai")) {
     chrome.tabs.update(details.tabId, {
       url: "https://www.bing.com/images/create"
     });
-
+ 
     chrome.notifications.create({
       type: "basic",
       iconUrl: "icon.png",
