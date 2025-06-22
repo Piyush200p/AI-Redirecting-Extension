@@ -7,13 +7,19 @@ chrome.webNavigation.onCompleted.addListener(async (details) => {
 
   // ChatGPT
   if (trimmedQuery.endsWith(".chatgpt")) {
-    chrome.tabs.update(details.tabId, { url: "https://chat.openai.com" });
+          const prompt = trimmedQuery.replace(".chatgpt", "").trim();
+          chrome.tabs.update(details.tabId, {
+            url: `https://chat.openai.com/?q=${encodeURIComponent(prompt)}`
+          });
   }
 
   // Copilot
-  else if (trimmedQuery.endsWith(".copilot")) {
-    chrome.tabs.update(details.tabId, { url: "https://copilot.microsoft.com" });
-  }
+  if (trimmedQuery.endsWith(".copilot")) {
+          const prompt = trimmedQuery.replace(".copilot", "").trim();
+          chrome.tabs.update(details.tabId, {
+            url: `https://copilot.microsoft.com/?q=${encodeURIComponent(prompt)}`
+          });
+        }
 
   // Perplexity
   else if (trimmedQuery.endsWith(".perplexity")) {
